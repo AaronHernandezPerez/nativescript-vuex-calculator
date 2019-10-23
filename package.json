@@ -3,21 +3,48 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "build:android": "npm run setup-webpack-config && tns build android --env.production && npm run remove-webpack-config",
+    "build:ios": "npm run setup-webpack-config && tns build ios --env.production && npm run remove-webpack-config",
+    "build:web": "vue-cli-service build --mode production.web",
+    "clean:android": "rimraf platforms/android",
+    "clean:ios": "rimraf platforms/ios",
+    "clean:platforms": "rimraf platforms",
+    "debug:android": "npm run setup-webpack-config && tns debug android --env.development",
+    "debug:ios": "npm run setup-webpack-config && tns debug ios --env.development",
+    "preview:android": "npm run setup-webpack-config && tns preview --env.development --env.android",
+    "preview:ios": "npm run setup-webpack-config && tns preview --env.development --env.ios",
+    "remove-webpack-config": "node ./node_modules/vue-cli-plugin-nativescript-vue/lib/scripts/webpack-maintenance post",
+    "serve:android": "npm run setup-webpack-config && tns run android --env.development",
+    "serve:ios": "npm run setup-webpack-config && tns run ios --env.development",
+    "serve:web": "vue-cli-service serve --mode development.web",
+    "setup-webpack-config": "node ./node_modules/vue-cli-plugin-nativescript-vue/lib/scripts/webpack-maintenance pre"
   },
   "dependencies": {
     "core-js": "^2.6.5",
-    "vue": "^2.6.10"
+    "nativescript-vue": "^2.4.0",
+    "tns-core-modules": "^6.1.0",
+    "vue": "^2.6.10",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/traverse": "^7.5.5",
     "@vue/cli-plugin-babel": "^3.12.0",
     "@vue/cli-plugin-eslint": "^3.12.0",
     "@vue/cli-service": "^3.12.0",
     "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.6",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "nativescript-dev-webpack": "^1.2.0",
+    "nativescript-vue-template-compiler": "^2.4.0",
+    "nativescript-worker-loader": "~0.9.5",
+    "node-sass": "^4.12.0",
+    "rimraf": "^2.6.3",
+    "string-replace-loader": "^2.2.0",
+    "vue-cli-plugin-nativescript-vue": "^0.2.1",
     "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {
@@ -32,6 +59,10 @@
     "rules": {},
     "parserOptions": {
       "parser": "babel-eslint"
+    },
+    "globals": {
+      "TNS_APP_MODE": true,
+      "TNS_APP_PLATFORM": true
     }
   },
   "postcss": {
@@ -42,5 +73,14 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ]
+  ],
+  "nativescript": {
+    "id": "org.nativescript.application",
+    "tns-ios": {
+      "version": "6.1.0"
+    },
+    "tns-android": {
+      "version": "6.1.0"
+    }
+  }
 }
