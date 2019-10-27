@@ -23,4 +23,4 @@ yarn-error.log*
 # NativeScript application
 hooks
 platforms
-webpack.config.js
+# webpack.config.js
