@@ -37,3 +37,13 @@ tns build android --release --key-store-path /keystore/file/location/appkeystore
 tns build android --bundle --env.uglify
 ```
 
+# Add platform
+```
+tns platform add android
+```
+
+Remove
+
+```
+tns platform remove android
+```
